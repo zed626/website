@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.aiwac.dao.WeChatBusinessDao">  
+<select id="getBusiness" parameterType="com.aiwac.model.WeChatBusinessSql" resultType="com.aiwac.model.WeChatBusinessSql">  
+    SELECT * FROM s_business WHERE id=#{id} 
+</select> 
+<select id="getBusinessWithId" parameterType="int" resultType="com.aiwac.model.WeChatBusinessSql">  
+    SELECT * FROM s_business WHERE id=#{id} 
+</select> 
+
+<insert id="addBusiness" parameterType="com.aiwac.model.WeChatBusinessSql" flushCache="true">  
+   INSERT INTO s_business (business_id,u_id,s_id,photopath,score,platform,seriel,realemotion,expectemotion) VALUES (#{business_id},#{u_id},#{s_id},#{photopath},#{score},#{platform},#{seriel},#{realemotion},#{expectemotion})  
+</insert>  
+
+<delete id="deleteBusiness" parameterType="int">  
+    DELETE FROM s_business WHERE id=#{id}  
+</delete>  
+</mapper>

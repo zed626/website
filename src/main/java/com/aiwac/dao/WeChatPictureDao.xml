@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.aiwac.dao.WeChatPictureDao">  
+<select id="getPicture" parameterType="com.aiwac.model.WeChatPicture" resultType="com.aiwac.model.WeChatPicture">  
+    SELECT * FROM s_picture WHERE p_id=#{id} 
+</select> 
+<select id="getPictureWithSceneId" parameterType="int" resultType="com.aiwac.model.WeChatPicture">  
+    SELECT * FROM s_picture WHERE s_id=#{id} ORDER BY seriel
+</select> 
+
+<insert id="addPicture" parameterType="com.aiwac.model.WeChatPicture" flushCache="true">  
+   INSERT INTO s_picture (s_id,seriel,url,emotion) VALUES (#{s_id},#{seriel},#{url},#{emotion})  
+</insert>  
+<update id="updatePicture" parameterType="com.aiwac.model.WeChatPicture">  
+    UPDATE s_picture SET url=#{url} WHERE p_id=#{p_id}  
+</update>  
+<delete id="deletePicture" parameterType="int">  
+    DELETE FROM s_picture WHERE p_id=#{p_id}  
+</delete>  
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.aiwac.dao.WeChatUserInfoDao">  
+<select id="getUser" parameterType="com.aiwac.model.WeChatUserInfo" resultType="com.aiwac.model.WeChatUserInfo">  
+    SELECT * FROM s_user WHERE u_openid=#{openid} 
+</select> 
+<select id="getUserWithId" parameterType="com.aiwac.model.WeChatUserInfo" resultType="com.aiwac.model.WeChatUserInfo">  
+    SELECT * FROM s_user WHERE u_openid=#{openid} 
+</select> 
+
+<insert id="addUser" parameterType="com.aiwac.model.WeChatUserInfo" flushCache="true">  
+   INSERT INTO s_user (u_openid,nickname,sex,language,city,province,country,headimgurl) VALUES (#{openid},#{nickname},#{sex},#{language},#{city},#{province},#{country},#{headimgurl})  
+</insert>  
+<update id="updateUser" parameterType="com.aiwac.model.WeChatUserInfo">  
+    UPDATE s_user SET headimgurl=#{headimgurl} WHERE u_openid=#{openid}  
+</update>  
+<delete id="deleteUser" parameterType="String">  
+    DELETE FROM s_user WHERE u_openid=#{openid}  
+</delete>  
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.aiwac.dao.WeChatSceneDao">  
+<select id="getScene" parameterType="com.aiwac.model.WeChatScene" resultType="com.aiwac.model.WeChatScene">  
+    SELECT * FROM s_scene WHERE s_id=#{s_id} 
+</select> 
+<select id="getSceneWithId" parameterType="int" resultType="com.aiwac.model.WeChatScene">  
+    SELECT * FROM s_scene WHERE s_id=#{s_id} 
+</select> 
+<select id="getSceneByName" parameterType="com.aiwac.model.WeChatScene" resultType="com.aiwac.model.WeChatScene">  
+    SELECT * FROM s_scene WHERE name=#{name} 
+</select> 
+
+<select id="getAllScene" resultType="com.aiwac.model.WeChatScene">  
+    SELECT * FROM s_scene
+</select> 
+
+<select id="getAvailableScene" resultType="com.aiwac.model.WeChatScene">  
+    SELECT * FROM s_scene WHERE available=1
+</select> 
+
+<insert id="addScene"  useGeneratedKeys="true"  keyProperty="s_id"  parameterType="com.aiwac.model.WeChatScene" flushCache="true">  
+   INSERT INTO s_scene (name,number,available,musicurl) VALUES (#{name},#{number},#{available},#{musicurl}) 
+</insert>  
+<update id="updateScene" parameterType="com.aiwac.model.WeChatScene">  
+    UPDATE s_scene SET available=#{available} WHERE s_id=#{s_id}  
+</update>  
+<delete id="deleteScene" parameterType="int">  
+    DELETE FROM s_scene WHERE s_id=#{s_id}  
+</delete>  
+
+<select id="getSceneCount" resultType="int">  
+    SELECT count(*) FROM s_scene 
+</select> 
+
+<select id="getPageScene" resultType="com.aiwac.model.WeChatScene">  
+    SELECT * FROM s_scene limit #{0},#{1}
+</select> 
+</mapper>

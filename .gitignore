@@ -6,4 +6,5 @@ bin/
 logs/
 src/main/webapp/WEB-INF/classes/
 src/main/webapp/WEB-INF/lib/
+src/main/java/com/aiwac/constant/WeChatConstant.java
 config/*.properties
