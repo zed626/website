@@ -5,9 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import com.aiwac.bean.request.WeChatBusiness;
 import com.aiwac.constant.Constant;
@@ -48,7 +47,11 @@ public class WechatUpload {
         logger.info("get wechat data: " + data);
         String res = URLDecoder.decode(data, "UTF-8");
         logger.info("resolve with ut: " + res);
-        WeChatBusiness now = (WeChatBusiness) JsonUtil.validateJsonStr(res, WeChatBusiness.class);      
+        WeChatBusiness now = (WeChatBusiness) JsonUtil.validateJsonStr(res, WeChatBusiness.class);
+        if(now==null) {
+        	logger.info("the message is not in correct format!");
+        	return "the message is not in correct format!";
+        }
         byte[] picByte = Base64.decodeBase64(now.getData().replaceAll(" ","+"));
         String business_id = now.getBusiness_id();
         String u_id = now.getUser_id();
@@ -93,6 +96,7 @@ public class WechatUpload {
    			return "{"+"\"emotion\":\""+-1+"\",\"score\":\""+-1+"\"}";
    		}
     }
+}
     
     
     /*
@@ -135,4 +139,3 @@ public class WechatUpload {
 
     }
     */
-}

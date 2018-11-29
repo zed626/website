@@ -1,0 +1,62 @@
+DROP DATABASE wechat;
+
+CREATE DATABASE wechat DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+
+USE wechat;
+
+CREATE TABLE s_user(
+    u_openid VARCHAR(30) NOT NULL UNIQUE,
+    nickname VARCHAR(128) NOT NULL ,
+	sex int,
+	language VARCHAR(10),
+	city VARCHAR(32),
+	province VARCHAR(32),
+	country VARCHAR(32),
+	headimgurl VARCHAR(150),
+    created_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY(u_openid)
+);
+
+CREATE TABLE s_scene(
+    s_id INT AUTO_INCREMENT,
+    name VARCHAR(32) NOT NULL UNIQUE,
+    number INT NOT NULL,
+    available INT  NOT NULL,
+    musicurl VARCHAR(64) NOT NULL,
+    created_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY(s_id)
+);
+
+
+
+CREATE TABLE s_picture(
+    p_id INT AUTO_INCREMENT,
+	s_id INT NOT NULL,
+	seriel INT NOT NULL,
+    url VARCHAR(64) NOT NULL,
+	emotion INT NOT NULL,
+    created_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(p_id),
+	FOREIGN KEY(s_id) REFERENCES s_scene(s_id)
+);
+
+CREATE TABLE s_business(
+    id INT AUTO_INCREMENT,
+	business_id VARCHAR(25) NOT NULL,
+    u_id VARCHAR(30) NOT NULL,
+    s_id INT NOT NULL,
+	photopath VARCHAR(512) NOT NULL,
+	score INT NOT NULL,
+	platform VARCHAR(10) NOT NULL,
+	seriel INT NOT NULL,
+	realemotion INT NOT NULL,
+	expectemotion INT NOT NULL,
+    created_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	
+    FOREIGN KEY(u_id) REFERENCES s_user(u_openid),
+    FOREIGN KEY(s_id) REFERENCES s_scene(s_id),
+    PRIMARY KEY(id)
+);
+
